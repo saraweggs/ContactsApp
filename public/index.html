@@ -11,10 +11,10 @@
 <div class="post">
   <div class="addContact">
     <form ng-submit="ctrl.createContact()">
-      <input type="text" ng-model="ctrl.name" placeholder="Name" /></br>
-      <input type="text" ng-model="ctrl.address" placeholder="Address" /></br>
-      <input type="text" ng-model="ctrl.phone" placeholder="Phone" /></br>
-      <input type="text" ng-model="ctrl.email" placeholder="Email" /></br>
+      <input type="text" ng-model="ctrl.createNew.name" placeholder="Name" /></br>
+      <input type="text" ng-model="ctrl.createNew.address" placeholder="Address" /></br>
+      <input type="text" ng-model="ctrl.createNew.phone" placeholder="Phone" /></br>
+      <input type="text" ng-model="ctrl.createNew.email" placeholder="Email" /></br>
       <input type="submit" value="Add Contact">
     </form>
   </div>
@@ -26,10 +26,10 @@
           <span>{{contact.name}}</span>
           <button ng-click="ctrl.indexOfShowContact = $index">Show Contact Info</button>
             <div ng-if="$index === ctrl.indexOfShowContact">
-              {{contact.address}}
-              {{contact.phone}}
-              {{contact.email}}
-              <button ng-click="ctrl.indexOfShowContact === $index">Hide Info</button>
+              {{contact.address}}</br>
+              {{contact.phone}}</br>
+              {{contact.email}}</br>
+              <button ng-click="ctrl.indexOfShowContact = $index">Hide Info</button>
             </div>
         </div>
       </div>
