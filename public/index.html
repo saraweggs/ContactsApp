@@ -7,20 +7,41 @@
     <script src="/js/app.js" charset="utf-8"></script>
   </head>
   <body ng-controller="contactsController as ctrl">
-    {{ctrl.contact}}
-    <!--  -->
-    <div class="">
-      <div class="get">
 
-      </div>
-      <div class="post">
+<div class="post">
+  <div class="addContact">
+    <form ng-submit="ctrl.createContact()">
+      <input type="text" ng-model="ctrl.name" placeholder="Name" /></br>
+      <input type="text" ng-model="ctrl.address" placeholder="Address" /></br>
+      <input type="text" ng-model="ctrl.phone" placeholder="Phone" /></br>
+      <input type="text" ng-model="ctrl.email" placeholder="Email" /></br>
+      <input type="submit" value="Add Contact">
+    </form>
+  </div>
+</div>
 
+<div class="get">
+    <div ng-repeat="contact in ctrl.contacts">
+        <div>
+          <span>{{contact.name}}</span>
+          <button ng-click="ctrl.indexOfShowContact = $index">Show Contact Info</button>
+            <div ng-if="$index === ctrl.indexOfShowContact">
+              {{contact.address}}
+              {{contact.phone}}
+              {{contact.email}}
+              <button ng-click="ctrl.indexOfShowContact === $index">Hide Info</button>
+            </div>
+        </div>
       </div>
+    </div>
+
+
       <div class="update">
 
       </div>
       <div class="delete">
 
     </div>
+  </div>
   </body>
 </html>
