@@ -1,34 +1,34 @@
 const app = angular.module('ContactsApp', []);
 
 app.controller('contactsController', ['$http', function ($http) {
-  const controller = this;
+  // const controller = this;
   this.indexOfShowContact = null;
+  this.createNew = {}
+  this.contact = '';
+  this.contacts = []
 
   this.createContact = function() {
     $http({
       method: 'POST',
       url: '/contacts',
-      data: {
-        name: this.name,
-        address: this.address,
-        phone: this.phone,
-        email: this.email
-      }
-    }).then(function(response) {
-      this.getContacts();
-    }, function() {
-      console.log('error');
+      data: this.createNew
+    }).then(response => {
+      this.contacts.unshift(response.data)
+      this.createNew = {}
+    }, error => {
+      console.log(error);
     })
   }
 
-  this.getContacts = function() {
+  this.getContacts = () => {
     $http({
       method: 'GET',
-      url: '/contacts',
-    }).then(function(response) {
-      controller.contacts = response.data;
-    }, function() {
-      console.log('error');
+      url: '/contacts'
+    }).then(response => {
+      this.contacts = response.data
+      this.contact = this.contacts[0]
+    }, error => {
+      console.log(error);
     })
   }
 
