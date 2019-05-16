@@ -5,22 +5,71 @@
     <title>Contacts App</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.min.js" charset="utf-8"></script>
     <script src="/js/app.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/skeleton.css">
+    <link rel="stylesheet" href="css/app.css">
   </head>
   <body ng-controller="contactsController as ctrl">
-    {{ctrl.contact}}
-    <!--  -->
-    <div class="">
-      <div class="get">
+  <div class="header">
+  <h1>Contacts</h1>
+</div>
+<div class="contactsContainer">
+<div class="post">
+    <form ng-submit="ctrl.createContact()">
+      <input class="newInput" type="text" ng-model="ctrl.createNew.name" placeholder="Name" /></br>
+      <input class="newInput" type="text" ng-model="ctrl.createNew.address" placeholder="Address" /></br>
+      <input class="newInput" type="text" ng-model="ctrl.createNew.phone" placeholder="Phone" /></br>
+      <input class="newInput" type="text" ng-model="ctrl.createNew.email" placeholder="Email" /></br>
+      <input type="submit" value="Add Contact">
+    </form>
+  </div>
+
+
+<div class="get">
+    <div ng-repeat="contact in ctrl.contacts">
+        <div>
+          <span>{{contact.name}}</span></br>
+
+          <button ng-click="ctrl.indexOfShowContact = $index">Show Contact Info</button>
+
+            <div ng-if="$index === ctrl.indexOfShowContact">
+              {{contact.address}}</br>
+              {{contact.phone}}</br>
+              {{contact.email}}</br>
+              <button ng-click="ctrl.indexOfShowContact === $index">Hide Info</button>
+            </div>
+        </div>
+        <div class="">
+          <!--  updates -submit form-->
+          <form ng-if="$index === ctrl.indexOfEditFormToShow" ng-submit="ctrl.updateContact(contact)">
+              <input ng-model="ctrl.updatedAddress" type="text" placeholder="Address"/>
+              <input ng-model="ctrl.updatedPhone" type="text" placeholder="Phone"/>
+              <input ng-model="ctrl.updatedEmail" type="text" placeholder="email"/>
+
+
+              <input type="submit" value="Update"/>
+              <a href="/" ng-if="$index === ctrl.indexOfEditFormToShow" ng-click="ctrl.indexOfEditFormToShow = $index" >Cancel</a>
+
+
+          </form>
+          <!-- Edit button -->
+          <button
+              ng-if="$index !== ctrl.indexOfEditFormToShow"
+              href="#"
+              ng-click="ctrl.indexOfEditFormToShow = $index">
+                  Edit Contact
+          </button></br>
+
+          <!-- Delete contact  -->
+          <button ng-click="ctrl.deleteContact(contact._id)">Delete Contact</button>
+
+        </div>
 
       </div>
-      <div class="post">
-
-      </div>
-      <div class="update">
-
-      </div>
-      <div class="delete">
-
     </div>
+
+  </div>
+
+
   </body>
 </html>
