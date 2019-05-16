@@ -1,7 +1,7 @@
 const app = angular.module('ContactsApp', []);
 
 app.controller('contactsController', ['$http', function ($http) {
-  // const controller = this;
+
   this.indexOfShowContact = null;
   this.indexOfEditFormToShow = null;
   this.createNew = {}
